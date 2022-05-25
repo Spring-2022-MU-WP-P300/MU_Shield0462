@@ -1,22 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('./config/dbConnect')();
+const User = require('./models/User');
+const usersRoute = require('./routes/usersRoute');
 const app = express();
 
-//connect DB
+//passing bode data
+app.use(express.json());
 
-mongoose.connect('mongodb+srv://Sajon:5s6MH8RzeqQP4giB@cluster0.gdsf4.mongodb.net/test', {
-useUnifiedTopology: true
-})
-.then(() => console.log('Db Connected'))
-.catch(err => console.log(err));
+
+
 
 //Routes
-//user routes
+app.use('/api/users',usersRoute);
 
-//register route
-app.post('/api/users/register', (req,res)=>{
-    res.send('Register route');
-});
 //login route
 app.post('/api/users/login', (req,res)=>{
     res.send('Login route');
